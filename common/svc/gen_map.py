@@ -11,16 +11,7 @@ for i in range(16) :
 maptype = 8
 
 def idx_from_chr(c) :
-	c = c.lower()
-	o = ord(c)
-	if c.isdigit() :
-		return o - ord("0")
-	elif ord("a") <= o <= ord("z") :
-		return 10 + o - ord("a")
-	elif c == "-" :
-		return 36
-	elif c == "/" :
-		return 37
+        return ord(c)
 
 def mask_from_segs(s) :
 	if len(s) == 0 :

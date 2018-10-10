@@ -6,42 +6,23 @@
 
 static const svc_lcd_map_t *digit_maps[] = {
 	//big digits
-	&svc_lcd_map_ad,
-	&svc_lcd_map_normal,
-	&svc_lcd_map_ad,
-	&svc_lcd_map_normal,
+	&svc_lcd_map_ad,      //0
+	&svc_lcd_map_normal,  //1
+	&svc_lcd_map_ad,      //2
+	&svc_lcd_map_normal,  //3
 	
 	//second digits
-	&svc_lcd_map_normal,
-	&svc_lcd_map_normal,
+	&svc_lcd_map_normal,  //4
+	&svc_lcd_map_normal,  //5
 	
 	//upper right
-	&svc_lcd_map_adg,
-	&svc_lcd_map_normal,
+	&svc_lcd_map_adg,     //6
+	&svc_lcd_map_normal,  //7
 	
 	//upper center
-	&svc_lcd_map_dig8,
-	&svc_lcd_map_dig9
+	&svc_lcd_map_dig8,    //8
+	&svc_lcd_map_dig9     //9
 };
-
-
-static const uint8_t idx_from_char(char c) {
-	// 0...9 a...z - /
-	c = tolower(c);
-	if(isdigit(c)) {
-		return c - '0';
-	}
-	else if(c >= 'a' && c <= 'z') {
-		return 10 + c - 'a';
-	}
-	else if(c == '-') {
-		return 36;
-	}
-	else if(c == '/') {
-		return 37;
-	}
-	return 0;
-}
 
 static uint16_t svc_lcd_map_get(const svc_lcd_map_t *map, uint8_t idx) {
 	if(idx >= map->length) {
@@ -58,6 +39,11 @@ static uint16_t svc_lcd_map_get(const svc_lcd_map_t *map, uint8_t idx) {
 	return 0;
 }
 
+/* Print a character.
+ * Inputs:
+ * dig = Location to print character
+ * c = Character to print, in US ASCII
+ */
 void svc_lcd_putc(uint8_t dig, char c) {
 	if(dig >= ARRAY_SIZE(digit_maps)) {
 		return;
@@ -65,7 +51,7 @@ void svc_lcd_putc(uint8_t dig, char c) {
 	const svc_lcd_map_t *map = digit_maps[dig];
 	uint16_t segments = 0;
 	if(c != ' ') {
-		segments = svc_lcd_map_get(map, idx_from_char(c));
+		segments = svc_lcd_map_get(map, c);
 	}
 	hal_lcd_dig_set(dig, segments);
 }

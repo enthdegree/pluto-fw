@@ -2,6 +2,7 @@
 #include "app.h"
 
 extern const app_t app_app_launcher;
+extern const app_t app_app_rpn;
 extern const app_t app_app_time;
 extern const app_t app_app_conf;
 extern const app_t app_app_play;

@@ -4,6 +4,7 @@ SRC += ../common/svc/lcd.c \
        ../common/svc/util.c \
        ../common/svc/aux_timer.c \
        ../common/svc/beep.c \
+       ../common/svc/rpn.c \
        ../common/svc/melody.c \
        ../common/svc/chro.c \
        ../common/svc/alarm.c \
@@ -16,6 +17,7 @@ SRC += ../common/svc/lcd.c \
        ../common/svc/rtc_adj.c \
 
 include ../common/svc/otp/sources.mk
+include ../common/svc/rpn/sources.mk
 
 MAPS = ../common/svc/maps/normal.map ../common/svc/maps/ad.map ../common/svc/maps/adg.map ../common/svc/maps/dig8.map ../common/svc/maps/dig9.map
 MAPS_C = $(MAPS:.map=.c)

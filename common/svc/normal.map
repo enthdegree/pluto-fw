@@ -1,4 +1,4 @@
-MAP8
+MAP16
 0	abcdef
 1	bc
 2	abged
@@ -18,24 +18,29 @@ f	aefg
 g	acdef
 h	bcefg
 i	e
-j	abcde
-k	bcefg
-l	fg
+j	bcde
+k	acefg
+l	def
 m	ace
-n	abf
+n	abcef
 o	abcdef
 p	abefg
 q	abdfg
-r	af
-s	acdfg
+r	aef
+s	cdfg
 t	defg
-u	bgf
-v	bgf
+u	bcdef
+v	bcdef
 w	bdf
 x	bcefg
 y	bcdfg
 z	abdeg
 -	g
-/ 	bge
-.	cdeg
-+	bcg
++	efg
+/	beg
+.	d
+=	dg
+^	abf
+(	adf
+)	abd
+?	abeg
