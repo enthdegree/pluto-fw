@@ -5,6 +5,12 @@ hardware side of things and a more information, see the
 This document is incomplete as it only covers the most important aspects of the firmware, the rest is 
 left as an exercise to the reader.
 
+-----
+
+This fork attempts to add a reverse-polish-notation calculator controlled by morse code, although it has only been tested in the simulator and not hardware. Documentation and demos to come (if it works on real hardware) but for now the comments in `common/app/rpn/app.c` describe controls and the repo `enthdegree/pluto-rpn` gives a usage demo for the UI concept.
+
+------
+
 # Features
 - Displays time in decimal/binary/hexadecimal base
 - Multiple alarms
