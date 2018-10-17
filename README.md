@@ -16,14 +16,19 @@ See `conversion_notes.md` for notes on what had to be done to pull `enthdegree/p
 To compile for target, make sure the include line at the bottom of `target/msp430fr6972.ld` points to its location within your TI toolchain installation.
 
 ## Todo for calculator:
-- Need to write documentation.
+- Write documentation.
 - `svc/rpn/cordic_wrapped.c`, my interface to Voidware.com's cordic implementation, is untested.
-- Some multiplications and divisions in `svc/rpn/cordic_wrapped.c` are unnecessarily lossy, should be converted to \*\/ by 2.
+    - Some multiplications and divisions in `svc/rpn/cordic_wrapped.c` are unnecessarily lossy, should be converted to \*\/ by 2.
+    - Some recursive calls in `cordic_wrapped.c` might loop infinitely.
+    - `NAN` and infinite input to functions is untested.
 - `process_token()` from `svc/rpn/calc.c`, which provides the RPN calculator's interface to `svc/rpn/cordic_wrapped.c` is also untested.
-- `mystrtod(...)` is not completely tested.
-- Float display in `app/rpn/app.c` is buggy, for example it sometimes displays 1 as `1000 -0`. Interpreted as `1.000e-0`
-- Inputting Morse code should not wipe display of the current text buffer (controlled in `app/rpn/app.c`).
-- Add a convenient way of displaying previous stack items beyond just the top.
+    - Calls to functions in `cordic_wrapped.c` could contain bugs.
+    - `mystrtod(...)`, which converts user input to doubles, is not completely tested.
+- The interface as defined in `app/rpn/app.c` is buggy. 
+    - Float display, for example it sometimes displays 1 as `1000 -0`. Interpreted as `1.000e-0`
+    - Inputting Morse code should not wipe display of the current text buffer.
+    - Need a convenient way of displaying previous stack items beyond just the top.
+### Additions: 
 - Add Normal CDF, inverse Normal CDF, "Regress stack to distribution" functions.
 - Add 'Print as Hex' function.
 
