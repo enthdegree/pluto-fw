@@ -28,9 +28,11 @@ To compile for target, make sure the include line at the bottom of `target/msp43
     - Float display, for example it sometimes displays 1 as `1000 -0`. Interpreted as `1.000e-0`
     - Inputting Morse code should not wipe display of the current text buffer.
     - Need a convenient way of displaying previous stack items beyond just the top.
-### Additions: 
-- Add Normal CDF, inverse Normal CDF, "Regress stack to distribution" functions.
-- Add 'Print as Hex' function.
+## Wanted additions: 
+- Add Normal CDF, inverse Normal CDF functions
+- Add "Regress stack to distribution" functions (The fit's parameters and goodness could go into the registers).
+- Add "Commit chronograph history to stack" function
+- Add 'Print as Hex' function
 
 ------
 
