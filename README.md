@@ -7,11 +7,13 @@ left as an exercise to the reader.
 
 -----
 
-This fork attempts to add a reverse-polish-notation calculator controlled by morse code, although it has only been tested in the simulator and not hardware. It is very possible that it takes too many resources to actually run on the watch.
+This fork adds a reverse-Polish-notation calculator with Morse code input. It compiles for the target successfully but has only been tested in the simulator. The calculator performs computations using `double`s on the implementation of CORDIC from Voidware.com. To make room it removes the cryptographic features of the original pluto.
 
 Documentation and demos to come (if it works on real hardware) but for now the comments in `common/app/rpn/app.c` describe controls and the repo `enthdegree/pluto-rpn` gives a usage demo for the UI concept.
 
 See `conversion_notes.md` for notes on what had to be done to pull `enthdegree/pluto-rpn` into `carrotIndustries/pluto-fw`.
+
+To compile for target, make sure the include line at the bottom of `target/msp430fr6972.ld` points to its location within your TI toolchain installation.
 
 ------
 
