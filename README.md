@@ -15,6 +15,17 @@ See `conversion_notes.md` for notes on what had to be done to pull `enthdegree/p
 
 To compile for target, make sure the include line at the bottom of `target/msp430fr6972.ld` points to its location within your TI toolchain installation.
 
+## Todo for calculator:
+- Need to write documentation.
+- `svc/rpn/cordic_wrapped.c`, my interface to Voidware.com's cordic implementation, is untested.
+- `process_token()` from `svc/rpn/calc.c`, which provides the RPN calculator's interface to `svc/rpn/cordic_wrapped.c` is also untested.
+- `mystrtod(...)` is not completely tested.
+- Float display in `app/rpn/app.c` is buggy, for example it sometimes displays 1 as `1000 -0`. Interpreted as `1.000e-0`
+- Inputting Morse code should not wipe display of the current text buffer (controlled in `app/rpn/app.c`).
+- Add a convenient way of displaying previous stack items beyond just the top.
+- Add Normal CDF, inverse Normal CDF.
+
+
 ------
 
 # Features
