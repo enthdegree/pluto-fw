@@ -66,11 +66,6 @@ static const svc_menu_item_text_t menu_item8 = {
 	.handler = launch,
 	.user_data = (void *)&app_app_conf,
 };
-static const svc_menu_item_text_t menu_item9 = {
-	.text = "   otp",
-	.handler = launch,
-	.user_data = (void *)&app_app_otp,
-};
 
 static const svc_menu_item_text_t *menu_items[] = {
 	(void*)&menu_item0,
@@ -82,7 +77,6 @@ static const svc_menu_item_text_t *menu_items[] = {
 	(void*)&menu_item6,
 	(void*)&menu_item7,
 	(void*)&menu_item8,
-	(void*)&menu_item9,
 };
 
 static const svc_menu_t menu = {
@@ -90,7 +84,7 @@ static const svc_menu_t menu = {
 	.items = (void*)menu_items,
 	.handler_exit = menu_time,
 	.header = "la",
-	.header_pos = 9
+	.header_pos = 8
 };
 
 

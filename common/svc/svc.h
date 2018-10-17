@@ -13,6 +13,5 @@
 #include "backlight.h"
 #include "compass.h"
 #include "init.h"
-#include "otp.h"
 #include "seconds_since_last_set.h"
 #include "rtc_adj.h"

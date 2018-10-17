@@ -1,5 +1,6 @@
 /* calc.h Calculator internals 
 */
+#include "math.h"
 
 #define STACK_SIZE 16
 #define REG_SIZE 4 
@@ -21,10 +22,6 @@ struct calc_state {
  * Input: c = char to add to the token
  */
 void input_to_calc(struct calc_state * cs, char c);
-
-/* daprint print the first 5 of a list of doubles
-*/
-void daprint(double * da);
 
 /* init_calc Initialize calculator
 */

@@ -14,8 +14,12 @@ struct svc_rpn_t * svc_rpn_get(void);
 
 /* Initialize calculator data structure
  */
-void svc_rpn_init();
+void svc_rpn_init(void);
 
 /* Write morse code to buffer.
  */
 void svc_rpn_writemc(char c);
+
+/* Print top of stack.
+ */
+void svc_rpn_print_top(void);

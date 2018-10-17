@@ -6,5 +6,4 @@
 void svc_init(void) {
 	svc_alarm_init();
 	svc_countdown_init();
-	hal_aes_init();
 }

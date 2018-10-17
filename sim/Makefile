@@ -25,10 +25,10 @@ COBJ = $(addprefix $(BUILDPREFIX),$(CFILES:.c=.o))
 SOBJ = $(addprefix $(BUILDPREFIX),$(ASMFILES:.s=.o))
 OBJ  = $(COBJ) $(SOBJ)
 
-OPTIMIZE=-O0 -fdata-sections -ffunction-sections
-DEBUG   =-g3
+OPTIMIZE=-Os -s -fdata-sections -ffunction-sections
+DEBUG   =
 CFLAGS  =$(DEBUG)  $(OPTIMIZE) $(shell pkg-config --cflags libpulse) -MP -MMD -pthread -Wall -Wno-main
-LDFLAGS = -lzmq -lm $(shell pkg-config --libs libpulse) -pthread -lmbedcrypto
+LDFLAGS = -lzmq -lm $(shell pkg-config --libs libpulse) -pthread 
 
 $(EXECUTABLE): $(OBJ)
 	$(CC) $(CFLAGS) $(sort $(OBJ)) $(LDFLAGS) -o $@

@@ -12,11 +12,9 @@ SRC += ../common/svc/lcd.c \
        ../common/svc/backlight.c \
        ../common/svc/compass.c \
        ../common/svc/init.c \
-       ../common/svc/otp.c \
        ../common/svc/seconds_since_last_set.c \
        ../common/svc/rtc_adj.c \
 
-include ../common/svc/otp/sources.mk
 include ../common/svc/rpn/sources.mk
 
 MAPS = ../common/svc/maps/normal.map ../common/svc/maps/ad.map ../common/svc/maps/adg.map ../common/svc/maps/dig8.map ../common/svc/maps/dig9.map

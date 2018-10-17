@@ -8,5 +8,4 @@ include ../common/app/chro/sources.mk
 include ../common/app/alarm/sources.mk
 include ../common/app/countdown/sources.mk
 include ../common/app/compass/sources.mk
-include ../common/app/otp/sources.mk
 include ../common/app/speed/sources.mk

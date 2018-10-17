@@ -6,8 +6,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <stdio.h>
-#include <math.h>
 
 typedef struct {
     APP_PRIV_COMMON
@@ -48,29 +46,7 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
 	// Bottom Right long press  (print top of stack)
-		hal_lcd_clear();
-		if(0 == (*rpn).cs.n_stack) svc_lcd_puts(0, "empty");
-		else {
-			double top = (*rpn).cs.stack[(*rpn).cs.n_stack-1];
-			
-			// Sign
-			int sgn = (top < 0);
-			if(sgn) svc_lcd_putc(9, '-');
-			
-			top = abs(top);
-
-			// Exponent's sign
-			int esgn = (top < 1) && (top > 0);
-			if(esgn) {
-				svc_lcd_putc(6, '-');
-				top = 1.0/top;
-			}
-
-			char topstr[8];
-			sprintf(topstr, "%.3g", top);
-			int lts = strlen(topstr);
-			svc_lcd_puts(0, topstr + lts - MIN(lts,6));	
-		}
+		svc_rpn_print_top();
 	}
 
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {

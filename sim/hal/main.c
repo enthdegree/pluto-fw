@@ -1,7 +1,6 @@
 #include "common/hal/hal.h"
 #include "common/hal/lcd_segments.h"
 #include "common/svc/svc.h"
-#include "common/svc/otp/oath.h"
 #include <zmq.h>
 #include <unistd.h>
 #include <assert.h>
@@ -10,8 +9,6 @@
 #include <stdbool.h>
 #include <time.h>
 #include <pthread.h>
-#include <mbedtls/aes.h>
-#include <mbedtls/sha1.h>
 
 void *ctx;
 void *insock;
@@ -156,18 +153,8 @@ int main(void) {
 
 	outsock = zmq_socket(ctx, ZMQ_PULL);
 	zmq_bind(outsock, "ipc://aswemu-out");
-	char secret[] = {1,2,3};
-
-	int32_t out = 5;
-	oath_totp_generate (secret,
-		    3,
-		    1462981437, //now
-		    30,
-		    0, 6, &out);
-	printf("=%d\n", out);
 
 	beep_startup();
-	svc_init();
 	pthread_t thr;
 	pthread_create(&thr, 0, aux_timer_thread, 0);
 
@@ -264,30 +251,6 @@ uint8_t hal_compass_read(hal_compass_result_t *out) {
 
 void hal_compass_set_power(uint8_t on) {
 
-}
-
-static mbedtls_aes_context actx;
-
-void hal_aes_init(void) {
-	mbedtls_aes_init(&actx);
-	hal_aes_clear_key();
-}
-
-void hal_aes_set_key(uint8_t *key) {
-	mbedtls_aes_setkey_dec(&actx, key, 128);
-}
-
-void hal_aes_clear_key(void) {
-	static const uint8_t zerokey[16] = {0};
-	mbedtls_aes_setkey_dec(&actx, zerokey, 128);
-}
-
-void hal_aes_decrypt(uint8_t *dest, uint8_t *src) {
-	mbedtls_aes_crypt_ecb(&actx, MBEDTLS_AES_DECRYPT, src, dest);
-}
-
-void hal_sha1(const uint8_t *input, uint16_t len, uint8_t *output) {
-	mbedtls_sha1(input, len, output);
 }
 
 void hal_lcd_set_mode(hal_lcd_mode_t m) {

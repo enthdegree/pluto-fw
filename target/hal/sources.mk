@@ -11,8 +11,6 @@ SRC += hal/lcd.c \
        hal/i2c.c \
        hal/mag3110.c \
        hal/compass.c \
-       hal/aes/aes256.c \
-       hal/crypto.c \
        hal/debug.c \
        $(SMAPS_C)
 

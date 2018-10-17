@@ -24,7 +24,6 @@ void svc_main_proc(svc_main_proc_event_t event) {
 		static uint8_t div;
 		if(!div) { /* prescale to one second */
 			svc_countdown_process();
-			svc_otp_process();
 			svc_seconds_since_last_set_process();
 			svc_menu_process_timetohome(keypress);
 			keypress = 0;
