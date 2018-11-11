@@ -40,3 +40,4 @@
 # emacs
 .clang_complete
 Makefile2
+*.swo

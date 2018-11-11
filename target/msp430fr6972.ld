@@ -448,5 +448,6 @@ SECTIONS
 /* Include peripherals memory map                                           */
 /****************************************************************************/
 
-INCLUDE "/opt/ti/msp430/gcc/include/msp430fr6972_symbols.ld"
+INCLUDE "/opt/ti/ccsv8/ccs_base/msp430/include_gcc/msp430fr6972_symbols.ld"
+
 

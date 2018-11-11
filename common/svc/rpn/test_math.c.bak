@@ -1,0 +1,48 @@
+#include <math.h>
+#include <stdlib.h>
+#include <stdio.h>
+
+#include "cordic_wrapped.h"
+
+const double extremes_set[] = {INFINITY, -INFINITY, 0, -0, NAN, -NAN, M_PI, -M_PI, M_PI, M_E, -M_E, 1, -1, M_PI/2, -M_PI/2, 19837*M_PI, -283463*M_PI};
+int n_test = sizeof(extremes_set)/sizeof(double);
+typedef double (*unary_ptr)(double);
+
+/* diff: Return a modified difference between two unary double operators at a point
+ * Modified as so: If the results are both NAN or INFINITY or -INFINITY return 0.0. 
+ * If one result is NAN return INFINITY.
+ *
+ * Inputs: 
+ *  unary_ptr a = function a
+ *  unary_ptr b = function b
+ *  doule pt = point
+ *
+ * Output: Modified difference
+ */
+double diff( unary_ptr a, unary_ptr b, double pt) {
+	double a_pt = a(pt);
+	double b_pt = b(pt);
+	if( (isnan(a_pt) & isnan(b_pt)) || (a_pt == b_pt) ) return 0.0; 
+	if( isnan(a_pt) || isnan(b_pt) ) return INFINITY;
+	return abs(a(pt)-b(pt));
+}
+#define TEST_UNARY_EXTREMES(A,B) \
+	for(int idx=0; idx<n_test; idx++) {\
+		double err = diff(A,B, extremes_set[idx]);\
+		if(err == INFINITY) {\
+			double badval = A(extremes_set[idx]);\
+			double goodval = B(extremes_set[idx]);\
+			printf(#A"(%0.3f) = %0.3f, ", extremes_set[idx], badval);\
+			printf(#B"(%0.3f) = %0.3f\n", extremes_set[idx], goodval);\
+		}\
+	}
+
+int main() {
+	TEST_UNARY_EXTREMES(sin_wc,sin)
+	TEST_UNARY_EXTREMES(cos_wc,cos)
+	TEST_UNARY_EXTREMES(tan_wc,tan)
+	TEST_UNARY_EXTREMES(asin_wc,sin)
+	TEST_UNARY_EXTREMES(acos_wc,cos)
+	TEST_UNARY_EXTREMES(atan_wc,tan)
+	return 0;
+}

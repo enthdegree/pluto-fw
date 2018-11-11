@@ -161,7 +161,6 @@ int process_token(char * token, struct calc_state * cs) {
     else if(strcmp(token, "d") == 0) {
         CHECK_STACK(2)
         S[NS-2] = S[NS-2]/S[NS-1];
-	printf("%f\n",S[NS-2]);
         POP
         return 0;
     }
@@ -208,7 +207,7 @@ int process_token(char * token, struct calc_state * cs) {
 // Log base-10
     else if(strcmp(token, "lg") == 0) {
         CHECK_STACK(1)
-        S[NS-1] = log_wc(S[NS-1])/log_wc(10);
+        S[NS-1] = log_wc(S[NS-1])/M_LN10;
         return 0;
     }
 // Binary Shannon entropy (bits)
@@ -222,7 +221,7 @@ int process_token(char * token, struct calc_state * cs) {
             S[NS-1] = 0;
             return 0;
         }
-        S[NS-1] = (1/log_wc(2))* \
+        S[NS-1] = (1/M_LN2)* \
                   -S[NS-1]*log_wc(S[NS-1]) \
                   -(1-S[NS-1])*log_wc(1-S[NS-1]);
         return 0;
@@ -230,7 +229,7 @@ int process_token(char * token, struct calc_state * cs) {
 // Log base-2
     else if(strcmp(token, "lg2") == 0) {
         CHECK_STACK(1)
-        S[NS-1] = log_wc(S[NS-1])/log_wc(2);
+        S[NS-1] = log_wc(S[NS-1])/M_LN2;
         return 0;
     }
 #endif

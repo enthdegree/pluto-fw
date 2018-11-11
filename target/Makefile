@@ -2,7 +2,7 @@
 # user defines ################################################################
 TARGET = main
 MCU = msp430fr6972
-INC = -I. -I/opt/ti/msp430/gcc/include/ 
+INC = -I. -I/opt/ti/msp430/msp430-elf/include/  -I/opt/ti/ccsv8/ccs_base/msp430/include_gcc
 OUTDIR = output/target
 DEFINES =
 CFLAGS = $(DEFINES) -mmcu=$(MCU) -Os -s -Wunused -ffunction-sections -MP -MMD -Wall -Wno-main  
