@@ -12,12 +12,21 @@ typedef struct {
 } priv_t;
 
 #define PRIV(a) ((priv_t*)((a)->priv))
-#define PRINT_CURRENT_MC_CHAR char curr; \
-		hal_lcd_clear(); \
-		mc_writechar(&((*rpn).mcb), &curr); \
-		int mcc = (*rpn).mcb.bidx;\
-		svc_lcd_putc(7, curr);\
-		svc_lcd_puti(8, 1, mcc);\
+
+static void print_current_mc_char(struct svc_rpn_t * rpn) { 
+	char curr; 
+	mc_writechar(&((*rpn).mcb), &curr); 
+	int mcc = (*rpn).mcb.bidx;
+	svc_lcd_putc(7, curr);
+	svc_lcd_puti(8, 1, mcc);
+	return;
+}
+
+static void print_current_token(struct svc_rpn_t * rpn) {
+		int nlen = strlen((*rpn).cs.token);
+		svc_lcd_puts(0, (*rpn).cs.token + nlen-MIN(nlen,6));	
+		return;
+}
 
 static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
 
@@ -27,32 +36,44 @@ static void main(uint8_t view, const app_t *app, svc_main_proc_event_t event) {
     if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER) {
 	// Bottom Right button was pressed (dot)
 		svc_rpn_writemc('.');	
-		PRINT_CURRENT_MC_CHAR
+		hal_lcd_clear();
+		print_current_mc_char(rpn);
+		print_current_token(rpn);
 	}
 
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_UP) {
 	// Top Left button was pressed (dash)
 		svc_rpn_writemc('-'); 
-		PRINT_CURRENT_MC_CHAR
+		hal_lcd_clear();
+		print_current_mc_char(rpn);
+		print_current_token(rpn);
 	}
 
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_DOWN) {
-	// Bottom Left button was pressed (end morse code group, print end of current token)
-		svc_rpn_writemc('x'); 
+		// Bottom Left button was pressed (end morse code group, print end of current token)
 		hal_lcd_clear();
-		int nlen = strlen((*rpn).cs.token);
-		svc_lcd_puts(0, (*rpn).cs.token + nlen-MIN(nlen,6));	
+		svc_rpn_writemc('x'); 
+		print_current_token(rpn);
 	}
 
 	else if(event & SVC_MAIN_PROC_EVENT_KEY_ENTER_LONG) {
-	// Bottom Right long press  (print top of stack)
-		svc_rpn_print_top();
-	}
-
-	else if(event & SVC_MAIN_PROC_EVENT_KEY_UP_LONG) {
-	// Top Left long press (print number of things on stack)
+	// Bottom Right long press (print stack)
 		hal_lcd_clear();
-		svc_lcd_puti(1, 1, (*rpn).cs.n_stack);	
+
+		char curr; 
+		mc_writechar(&((*rpn).mcb), &curr); 
+
+		if(curr >= '1' && curr <= '9') {
+			svc_rpn_print_stack((int)(curr-'1'));
+			svc_lcd_puti(7, 1, (int)(curr-'1'));
+		}
+		else {
+			svc_rpn_print_stack(0);
+			svc_lcd_puti(8, 1, 1);
+		}
+		svc_lcd_puti(7, 1, (*rpn).cs.n_stack);	
+
+		mc_reset_buffer(&((*rpn).mcb));
 	}
 
 	// Bottom Left long press 

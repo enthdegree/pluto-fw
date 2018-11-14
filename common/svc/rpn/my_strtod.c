@@ -83,6 +83,7 @@ double my_strtod(const char *str, char **endptr) {
   }
 
   if (num_digits == 0) {
+    if (endptr) *endptr = p;
     return 0.0;
   }
 

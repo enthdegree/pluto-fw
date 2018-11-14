@@ -96,6 +96,17 @@ int process_token(char * token, struct calc_state * cs) {
         POP
         return 0;
     }
+// Flip last two on stack
+    else if(strcmp(token, "f") == 0) {
+        CHECK_STACK(2)
+        double c = S[NS-1];
+	POP
+        double d = S[NS-1];
+	POP
+	PUSH(c)
+	PUSH(d)
+        return 0;
+    }
 // Save to register
     /* Usage: X, to be saved, is on the top of the stack.
      *        Add register index A to the top of the stack.
@@ -297,16 +308,16 @@ int process_token(char * token, struct calc_state * cs) {
 
 // Try and convert to double, add to stack.
     /* Usage: Enter a number in any format detected by strtod( )
-     * 'e' represents a decimal point '.'
-     * 'd' represents scientific notation exponent
+     * 'd' represents a decimal point '.'
+     * 'e' represents scientific notation exponent
      * 't' represents a negative sign '-'
      *
      * 4.2e-3 could be entered as "4e2dt3"
      * or "0e0042"
      */
     char td[strlen(token)];
-    str_rep(token, td, 'e', '.');
-    str_rep(td, td, 'd', 'e');
+    str_rep(token, td, 'd', '.');
+    //str_rep(td, td, 'd', 'e');
     str_rep(td, td, 't', '-');
 
     char * cfail;

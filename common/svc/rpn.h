@@ -22,4 +22,4 @@ void svc_rpn_writemc(char c);
 
 /* Print top of stack.
  */
-void svc_rpn_print_top(void);
+void svc_rpn_print_stack(int idx);

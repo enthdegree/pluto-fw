@@ -38,14 +38,13 @@ void svc_rpn_writemc(char c) {
 	return;
 }
 
-/* Print top of stack.
+/* Print [idx] down from top of stack.
  */
-void svc_rpn_print_top(void) { 
-	hal_lcd_clear();
+void svc_rpn_print_stack(int idx) { 
 	int ns = svc_rpn.cs.n_stack;
-	if(0 == ns) svc_lcd_puts(0, "empty");
+	if(idx >= ns) svc_lcd_puts(0, "empty");
 	else {
-		double d = svc_rpn.cs.stack[ns-1];
+		double d = svc_rpn.cs.stack[ns-1-idx];
 		if(d == 0) {
 			svc_lcd_puts(0,"0");
 			return;
