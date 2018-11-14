@@ -41,3 +41,5 @@
 .clang_complete
 Makefile2
 *.swo
+
+*.swp

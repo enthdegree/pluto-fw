@@ -9,9 +9,10 @@ SRC += hal/lcd.c \
        hal/beepled.c \
        hal/aux_timer.c \
        hal/i2c.c \
-       hal/mag3110.c \
+       hal/lis3mdl.c \
        hal/compass.c \
        hal/debug.c \
+       hal/lis3mdl/driver/lis3mdl_reg.c \
        $(SMAPS_C)
 
 $(SMAPS_C): %.c: %.map $(GEN_SMAP)
